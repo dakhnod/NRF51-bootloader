@@ -1,0 +1,3 @@
+_build/
+bootloader.zip
+bootloader_with_softdevice_delay.hex
