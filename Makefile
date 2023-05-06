@@ -55,9 +55,9 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_mbr.c \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_settings.c \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_utils.c \
-  $(CUSTOM_INCLUDES_DIR)/dfu/nrf_ble_dfu.c  \
-  $(CUSTOM_INCLUDES_DIR)/dfu/nrf_dfu.c  \
-  $(CUSTOM_INCLUDES_DIR)/dfu/nrf_dfu_transport.c  \
+  $(CUSTOM_INCLUDES_DIR)/libraries/dfu/nrf_ble_dfu.c  \
+  $(CUSTOM_INCLUDES_DIR)/libraries/dfu/nrf_dfu.c  \
+  $(CUSTOM_INCLUDES_DIR)/libraries/dfu/nrf_dfu_transport.c  \
 
 # Include folders common to all targets
 INC_FOLDERS += \
@@ -116,6 +116,7 @@ CFLAGS += -D__HEAP_SIZE=0
 CFLAGS += -DSVC_INTERFACE_CALL_AS_NORMAL_FUNCTION
 CFLAGS += -DS130
 CFLAGS += -DBLE_STACK_SUPPORT_REQD
+CFLAGS += -DDFU_APP_DATA_RESERVED=0x00 # allow bootloader to override bonding and app data
 CFLAGS += -DNRF51822
 CFLAGS += -DNRF_SD_BLE_API_VERSION=2
 CFLAGS += -mcpu=cortex-m0
@@ -144,6 +145,7 @@ ASMFLAGS += -DS130
 ASMFLAGS += -DBLE_STACK_SUPPORT_REQD
 ASMFLAGS += -DNRF51822
 ASMFLAGS += -DNRF_SD_BLE_API_VERSION=2
+ASMFLAGS += -DDFU_APP_DATA_RESERVED=0x00  # allow bootloader to override bonding and app data
 
 # Linker flags
 LDFLAGS += -mthumb -mabi=aapcs -L $(TEMPLATE_PATH) -T$(LINKER_SCRIPT)
